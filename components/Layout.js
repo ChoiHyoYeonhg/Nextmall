@@ -26,11 +26,11 @@ export default function Layout({ title, children }) {
             </Link>
             <div>
               <Link href="/contect">
-                <a className="p-2 text-black">소개</a>
+                <a className="p-2 text-black">소개 </a>
               </Link>
               <Link href="/cart">
                 <a className="/p-2 text-black">
-                  Cart
+                  Cart &nbsp;
                   {cart.cartItems.length > 0 && (
                     <span className="ml-1 rounded-full bg-red-600 px-2 py-1 text-xs font-bold text-white">
                       {cartItemsCount}
