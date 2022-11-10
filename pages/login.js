@@ -23,9 +23,21 @@ export default function LoginScreen() {
     formState: { errors },
   } = useForm();
 
-  const submitHandler = ({ email, password }) => {
-    console.log(email, password);
+  const submitHandler = async ({ email, password }) => {
+    try {
+      const result = await signIn("credentials", {
+        redirect: false,
+        email,
+        password,
+      });
+      if (result.error) {
+        toast.error(result.error);
+      }
+    } catch (err) {
+      toast.error(getError(err));
+    }
   };
+
   return (
     <Layout title="Login">
       <form
@@ -82,17 +94,3 @@ export default function LoginScreen() {
     </Layout>
   );
 }
-const submitHandler = async ({ email, password }) => {
-  try {
-    const result = await signIn("credentials", {
-      redirect: false,
-      email,
-      password,
-    });
-    if (result.error) {
-      toast.error(result.error);
-    }
-  } catch (err) {
-    toast.error(getError(err));
-  }
-};
