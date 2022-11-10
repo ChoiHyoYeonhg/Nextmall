@@ -4,7 +4,6 @@ import { Store } from "../utils/Store";
 import { useContext, useEffect, useState } from "react";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useSession } from "next-auth/react";
 import { signOut, useSession } from "next-auth/react";
 import { Menu } from "@headlessui/react";
 import DropdownLink from "./DropdownLink";
