@@ -46,7 +46,7 @@ export default function ShippingScreen() {
   };
 
   return (
-    <Layout title="Shipping Address">
+    <Layout title="배달주소 입력">
       <CheckoutWizard activeStep={1} />{" "}
       <form
         className="mx-auto max-w-screen-md"
