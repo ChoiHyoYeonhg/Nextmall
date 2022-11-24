@@ -38,6 +38,17 @@ export default function LoginScreen() {
     }
   };
 
+  const githubLoginHandler = async () => {
+    try {
+      const result = await signIn("github", {
+        redirect: false,
+      });
+      console.log("Github login: " + result);
+    } catch (err) {
+      toast.error(getError(err));
+    }
+  };
+
   return (
     <Layout title="Login">
       <form
@@ -72,7 +83,7 @@ export default function LoginScreen() {
               required: "비밀번호를 입력하세요.",
               minLength: {
                 value: 3,
-                message: "3자리 이상의 비밀번호를 입력하세요.",
+                message: "3자 이상의 비밀번호를 입력하세요.",
               },
             })}
             className="w-full text-black"
@@ -89,6 +100,17 @@ export default function LoginScreen() {
         <div className="mb-4">
           계정이 없으면 회원가입을 하십시오. &nbsp;
           <Link href="register">Register</Link>
+        </div>
+        <div className="p-5 bg-gray-500 rounded-lg">
+          <div className="mb-4">
+            <button
+              className="primary-button w-full"
+              type="button"
+              onClick={githubLoginHandler}
+            >
+              Github Login
+            </button>
+          </div>
         </div>
       </form>
     </Layout>

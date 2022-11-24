@@ -7,12 +7,14 @@ import Image from "next/image";
 import { Store } from "../../utils/Store";
 import Product from "../../models/Product";
 import db from "../../utils/db";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 export default function ProductScreen({ product }) {
   const { state, dispatch } = useContext(Store);
+  const router = useRouter();
   //const { query } = useRouter();
   //const { slug } = query;
-  const router = useRouter();
   //const product = data.products.find((x) => x.slug === slug);
   if (!product) {
     return <Layout title="Product Not Found">Product Not Found</Layout>;
@@ -20,7 +22,7 @@ export default function ProductScreen({ product }) {
   const addToCartHandler = async () => {
     const existItem = state.cart.cartItems.find((x) => x.slug === product.slug);
     const quantity = existItem ? existItem.quantity + 1 : 1;
-    const { data } = await axios.get(`/api/products/${product_id}`);
+    const { data } = await axios.get(`/api/products/${product._id}`);
 
     if (data.countInStock < quantity) {
       return toast.error("Sorry. Product is out of stock");
@@ -34,7 +36,7 @@ export default function ProductScreen({ product }) {
   }
   return (
     <Layout title={product.name}>
-      <div className="py-2">
+      <div className="py-2 font-bold text-red-900">
         <Link href="/">Back to products</Link>
       </div>
       <div className="grid md:grid-cols-4 md:gap-3">
@@ -45,12 +47,12 @@ export default function ProductScreen({ product }) {
             width={640}
             height={640}
             layout="responsive"
-          ></Image>
+          />
         </div>
         <div>
           <ul>
             <li>
-              <h1 className="text-lg">{product.name}</h1>
+              <h1 className="text-lg font-bold">{product.name}</h1>
             </li>
             <li>Category: {product.category}</li>
             <li>Brand: {product.brand}</li>
@@ -81,4 +83,17 @@ export default function ProductScreen({ product }) {
       </div>
     </Layout>
   );
+}
+
+export async function getServerSideProps(context) {
+  const { params } = context;
+  const { slug } = params;
+  await db.connect();
+  const product = await Product.findOne({ slug }).lean();
+  await db.disconnect();
+  return {
+    props: {
+      product: product ? db.convertDocToObj(product) : null,
+    },
+  };
 }

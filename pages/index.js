@@ -5,7 +5,7 @@ import Product from "../models/Product";
 import db from "../utils/db";
 import { Store } from "../utils/Store";
 import { toast } from "react-toastify";
-
+import axios from "axios";
 import { useContext } from "react";
 
 export default function Home({ products }) {

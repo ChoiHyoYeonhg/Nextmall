@@ -10,13 +10,16 @@ export default function ProductItem({ product, addToCartHandler }) {
             src={product.image}
             alt={product.name}
             className="rounded shadow"
+            width={640}
+            height={640}
+            layout="responsive"
           />
         </a>
       </Link>
       <div className="flex flex-col items-center justify-center p-5">
         <Link href={`/product/${product.slug}`}>
           <a>
-            <h2 className="text-lg"> {product.name}</h2>
+            <h2 className="text-lg">{product.name}</h2>
           </a>
         </Link>
         <p className="mb-2">{product.brand}</p>
@@ -26,7 +29,7 @@ export default function ProductItem({ product, addToCartHandler }) {
           type="button"
           onClick={() => addToCartHandler(product)}
         >
-          Add to cart
+          카트에 넣기
         </button>
       </div>
     </div>
