@@ -49,6 +49,39 @@ export default function LoginScreen() {
     }
   };
 
+  const googleLoginHandler = async () => {
+    try {
+      const result = await signIn("google", {
+        redirect: false,
+      });
+      console.log("Google login: " + result);
+    } catch (err) {
+      toast.error(getError(err));
+    }
+  };
+
+  const kakaoLoginHandler = async () => {
+    try {
+      const result = await signIn("kakao", {
+        redirect: false,
+      });
+      console.log("Kakao login: " + result);
+    } catch (err) {
+      toast.error(getError(err));
+    }
+  };
+
+  const naverLoginHandler = async () => {
+    try {
+      const result = await signIn("naver", {
+        redirect: false,
+      });
+      console.log("Naver login: " + result);
+    } catch (err) {
+      toast.error(getError(err));
+    }
+  };
+
   return (
     <Layout title="Login">
       <form
@@ -109,6 +142,36 @@ export default function LoginScreen() {
               onClick={githubLoginHandler}
             >
               Github Login
+            </button>
+          </div>
+
+          <div className="mb-4">
+            <button
+              className="primary-button w-full"
+              type="button"
+              onClick={googleLoginHandler}
+            >
+              Google Login
+            </button>
+          </div>
+
+          <div className="mb-4">
+            <button
+              className="primary-button w-full"
+              type="button"
+              onClick={kakaoLoginHandler}
+            >
+              Kakao Login
+            </button>
+          </div>
+
+          <div className="mb-4">
+            <button
+              className="primary-button w-full"
+              type="button"
+              onClick={naverLoginHandler}
+            >
+              Naver Login
             </button>
           </div>
         </div>
