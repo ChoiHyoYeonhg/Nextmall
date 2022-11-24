@@ -44,7 +44,7 @@ function CartScreen() {
                   <th className="p-5 text-left">Item</th>
                   <th className="p-5 text-right">Quantity</th>
                   <th className="p-5 text-right">Price</th>
-                  <th className="p-5">Action</th>
+                  <th className="p-5 text-center">Action</th>
                 </tr>
               </thead>
               <tbody>
@@ -99,7 +99,7 @@ function CartScreen() {
               </li>
               <li>
                 <button
-                  onClick={() => router.push("'login?redirect=/shipping")}
+                  onClick={() => router.push("login?redirect=/shipping")}
                   className="primary-button w-full"
                 >
                   Check Out
