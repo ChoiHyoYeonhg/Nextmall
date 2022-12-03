@@ -11,7 +11,7 @@ const handler = async (req, res) => {
   await db.connect();
 
   const order = await Order.findByld(req.query.id);
-  await decodeBase64.disconnect();
+  await db.disconnect();
   res.send(order);
 };
 
